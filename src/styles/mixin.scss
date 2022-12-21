@@ -1,0 +1,58 @@
+
+@mixin box-row($align: center, $justify: center) {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin box-col($align: flex-start, $justify: flex-start) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin responsive-text {
+  @media all and (max-device-width: 720px){
+  h1 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+
+@media all and (max-device-width: 640px){
+  h1 {
+    font-size: 18px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+@media all and (max-device-width: 320px){
+  h1 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 12px;
+  }
+}
+
+}
+
+@mixin text($type: small) {
+  @if $type == medium {
+    font-size: 16px;
+  } @else if $type == 'big' {
+    font-size: 22px;
+  } @else {
+    font-size: 14px;
+  }
+
+  @include responsive-text()
+}

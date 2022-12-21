@@ -1,0 +1,19 @@
+@import "../../styles/mixin.scss";
+
+.container-empty {
+  @include box-col($align: center, $justify: center);
+  align-self: center;
+  // margin-top: 10%;
+
+  .content-empty {
+    align-self: center;
+    text-align: center;
+    padding: 1rem;
+
+    p {
+      text-align: center;
+      margin-top: 1rem;
+      @include text(medium);
+    }
+  }
+}

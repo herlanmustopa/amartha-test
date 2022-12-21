@@ -1,0 +1,71 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+.container-card {
+  @include box-row($align: center, $justify: space-between);
+  background-color: $white;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+
+  .content {
+    @include box-row($align: center, $justify: center);
+    align-self: center;
+    padding: 1rem;
+
+    .img {
+      align-self: center;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .desc {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5em;
+    padding-left: 10pt;
+    padding-right: 10pt;
+
+    p {
+      @include text(medium);
+    }
+  }
+
+  .header-card {
+    text-align: center;
+    align-items: center;
+    background-color: $green;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-top: 1rem;
+    font-family: "Nunito", sans-serif;
+    p {
+      align-self: center;
+      @include text(medium);
+      color: $white;
+    }
+  }
+
+  .footer-card {
+    text-align: center;
+    align-items: center;
+    background-color: $green;
+    width: 100%;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding-top: 1rem;
+    font-family: "Audiowide";
+    p {
+      align-self: center;
+      @include text(medium);
+      color: $white;
+    }
+  }
+}
+
+.container-card:hover {
+  background-color: $cloud;
+}

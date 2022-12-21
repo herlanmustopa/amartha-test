@@ -1,4 +1,4 @@
-import Home from "./home/dashboard";
+import Home from "./home/Dashboard";
 
 const pages = {
   Home: <Home />,

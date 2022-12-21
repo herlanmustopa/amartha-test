@@ -1,26 +1,22 @@
 // material
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {
   Breadcrumbs,
-  Card,
-  Link,
-  Container,
-  Divider,
-  Typography,
-  Stack,
+  Card, Container,
+  Divider, Link, PaginationItem, Stack, Typography
 } from "@mui/material";
+import Pagination from '@mui/material/Pagination';
+import usePagination from "./Pagination";
 
 import {
-  List,
-  AddData,
-  FilterData,
-  Header,
-  Empty,
-  DialogFilter,
+  AddData, Empty,
+  Header, List
 } from "../components";
 
-import { getData } from "../helpers/actions";
+import { getData } from "../helper/actions";
 // import { useGetCity, useGetSize } from "../hooks";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./styles.scss";
 
@@ -30,28 +26,39 @@ import { Link as RouterLink } from "react-router-dom";
 
 export default function ChannelManagement() {
   const [data, setData] = useState([]);
+  const [paginations, setPagintions] = useState("");
+  const [perPage, setPerpage] = useState(0);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [city, setCity] = useState("");
   const [size, setSize] = useState("");
   const [hasFilter, setHasFilter] = useState(false);
   const [showModalAdd, setShowModalAdd] = useState(false);
+  let [page, setPage] = useState(0);
 
   useEffect(() => {
     fetchData();
+
   }, []);
+
 
   const fetchData = async (params = null) => {
     try {
       setLoading(true);
       const data = await getData(params);
+      console.log(data);
 
       if (data) {
-        const newData = Array.from(new Set(data.map((i) => i.id)))
+        const newData = Array.from(new Set(data.data.map((i) => i.mal_id)))
           .filter((i) => i)
-          .map((i) => data.find((item) => item.id === i));
+          .map((i) => data.data.find((item) => item.mal_id === i));
+
+        console.log(newData.length);
 
         await setData(newData);
+        setPagintions(data.pagination.items.total);
+        setPerpage(data.pagination.items.per_page);
+        setPage(data.pagination.current_page);
         setLoading(false);
       }
     } catch (e) {
@@ -62,15 +69,12 @@ export default function ChannelManagement() {
   const onSubmitSearch = (value) => {
     handleFilterReset(false);
     if (value.length > 0) {
-      fetchData({ search: { komoditas: value } });
+      fetchData({ search: { title: value } });
     } else {
       fetchData();
     }
   };
 
-  const closeModalAdd = () => {
-    setShowModalAdd(false);
-  };
 
   const handleFilterReset = () => {
     setSize("");
@@ -80,6 +84,16 @@ export default function ChannelManagement() {
       fetchData();
     }
   };
+
+  const count = Math.ceil(data.length / perPage);
+  const _DATA = usePagination(data, perPage);
+
+
+  const handleChange = (e, p) => {
+    setPage(p);
+    _DATA.jump(p);
+  };
+
 
   return (
     <>
@@ -100,17 +114,12 @@ export default function ChannelManagement() {
                 List Daftar Ikan
               </Typography>
               <Typography variant="caption" sx={{ mb: 1 }}>
-                Daftar ikan yang tersedia dan dikelola dengan baik oleh tim
-                Efishery
+                Daftar Anime yang tersedia...
               </Typography>
             </Stack>
 
             <Stack direction="row" alignItems="center">
-              <AddData isVisible={showModalAdd} handleClose={closeModalAdd} />
-              <DialogFilter
-                isVisible={showModalAdd}
-                handleClose={closeModalAdd}
-              />
+              {/* <AddData isVisible={showModalAdd} handleClose={closeModalAdd} /> */}
             </Stack>
           </Stack>
           <Divider sx={{ mb: 2 }} />
@@ -122,6 +131,11 @@ export default function ChannelManagement() {
               onSearch={onSubmitSearch}
             />
           </Stack>
+          {/* {_DATA.currentData().map((item, index) => {
+
+            return <div key={item}>
+            </div>
+          })} */}
           <List list={data} loading={loading} />
           {!loading && data.length === 0 && (
             <Empty
@@ -129,6 +143,15 @@ export default function ChannelManagement() {
               desc="Data yang Anda cari tidak ada atau belum tersedia saat ini, silahkan isi data baru terlebih dahulu."
             />
           )}
+          <Stack spacing={2}>
+            <Pagination
+              count={count}
+              size="large"
+              page={page}
+              variant="outlined"
+              shape="rounded"
+              onChange={handleChange} />
+          </Stack>
         </Card>
       </Container>
     </>

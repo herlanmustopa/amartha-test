@@ -1,0 +1,8 @@
+@import '../../styles/mixin.scss';
+
+.container {
+  @include box-col();
+  padding-left: 1rem ;
+  padding-right: 1rem;
+}
+

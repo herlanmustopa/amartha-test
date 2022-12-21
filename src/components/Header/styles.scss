@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixin.scss";
+
+// .header {
+//   @include box-row($align: center, $justify: space-between);
+//   padding-left: 1rem;
+//   padding-right: 1rem;
+//   margin-top: 2rem;
+//   width: 100%;
+
+//   // .search {
+//   //   flex: 10;
+//   //   display: contents;
+//   // }
+
+//   .filter {
+//     flex: 2;
+//     margin-left: 1rem;
+
+//     a {
+//       cursor: pointer;
+//       :hover {
+//         color: $green;
+//       }
+//     }
+//   }
+// }
