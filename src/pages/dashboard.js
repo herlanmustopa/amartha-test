@@ -14,9 +14,8 @@ import {
   Header, List
 } from "../components";
 
-import { getData, getDataById } from "../helper/actions";
-// import { useGetCity, useGetSize } from "../hooks";
 import React, { useEffect, useState } from "react";
+import { getData, getDataById } from "../helper/actions";
 
 import "./styles.scss";
 
@@ -30,11 +29,10 @@ export default function ChannelManagement() {
   const [perPage, setPerpage] = useState(0);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [city, setCity] = useState("");
-  const [size, setSize] = useState("");
   const [hasFilter, setHasFilter] = useState(false);
   const [showModalAdd, setShowModalAdd] = useState(false);
   let [page, setPage] = useState(0);
+  const [options, setOptions] = useState("")
 
   useEffect(() => {
     fetchData();
@@ -53,7 +51,7 @@ export default function ChannelManagement() {
           .filter((i) => i)
           .map((i) => data.data.find((item) => item.mal_id === i));
 
-        // console.log(newData.length);
+        console.log(newData);
 
         await setData(newData);
         setPagintions(data.pagination.items.total);
@@ -79,8 +77,6 @@ export default function ChannelManagement() {
   };
 
   const handleFilterReset = () => {
-    setSize("");
-    setCity("");
     if (hasFilter) {
       setHasFilter(false);
       fetchData();
@@ -133,11 +129,6 @@ export default function ChannelManagement() {
               onSearch={onSubmitSearch}
             />
           </Stack>
-          {/* {_DATA.currentData().map((item, index) => {
-
-            return <div key={item}>
-            </div>
-          })} */}
           <Stack direction="row" alignItems="center">
           </Stack>
           <List list={data} loading={loading}>

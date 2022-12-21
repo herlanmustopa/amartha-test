@@ -4,9 +4,9 @@ import Search from "../Search";
 import "./styles.scss";
 
 const Header = (props) => {
-  const { search, setSearch, onSearch } = props;
+  const { search, setSearch, onSearch, options } = props;
 
-  return <Search search={search} setSearch={setSearch} onSearch={onSearch} />;
+  return <Search search={search} setSearch={setSearch} onSearch={onSearch} options={options} />;
 };
 
 export default Header;

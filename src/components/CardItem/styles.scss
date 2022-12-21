@@ -36,12 +36,13 @@
   .header-card {
     text-align: center;
     align-items: center;
-    background-color: $green;
+    background-color: #9400FF;
     width: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     padding-top: 1rem;
     font-family: "Nunito", sans-serif;
+
     p {
       align-self: center;
       @include text(medium);
@@ -52,12 +53,13 @@
   .footer-card {
     text-align: center;
     align-items: center;
-    background-color: $green;
+    background-color: #9400FF;
     width: 100%;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     padding-top: 1rem;
     font-family: "Audiowide";
+
     p {
       align-self: center;
       @include text(medium);

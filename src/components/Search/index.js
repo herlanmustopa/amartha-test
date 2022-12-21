@@ -12,7 +12,7 @@ const Search = ({ setSearch, onSearch }) => {
     setSearch(event.target.textContent);
     onSearch(event.target.textContent);
   };
-  const Ikan = ["Ikan Hiu", "Ikan Buntal", "Ikan Gurame", "Ikan Bawal"];
+  const Anime = ["Naruto", "Trigun", "One Piece", "Zipang"];
   return (
     <Autocomplete
       freeSolo
@@ -21,7 +21,7 @@ const Search = ({ setSearch, onSearch }) => {
       size="small"
       id="search komoditas"
       disableClearable
-      options={Ikan.map((name) => name)}
+      options={Anime.map((name) => name)}
       onChange={handleClickTag}
       onInputChange={handleChange}
       renderInput={(params) => (
