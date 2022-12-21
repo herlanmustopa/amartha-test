@@ -14,7 +14,7 @@ import {
   Header, List
 } from "../components";
 
-import { getData } from "../helper/actions";
+import { getData, getDataById } from "../helper/actions";
 // import { useGetCity, useGetSize } from "../hooks";
 import React, { useEffect, useState } from "react";
 
@@ -42,18 +42,18 @@ export default function ChannelManagement() {
   }, []);
 
 
-  const fetchData = async (params = null) => {
+  const fetchData = async (params) => {
     try {
       setLoading(true);
       const data = await getData(params);
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         const newData = Array.from(new Set(data.data.map((i) => i.mal_id)))
           .filter((i) => i)
           .map((i) => data.data.find((item) => item.mal_id === i));
 
-        console.log(newData.length);
+        // console.log(newData.length);
 
         await setData(newData);
         setPagintions(data.pagination.items.total);
@@ -74,7 +74,9 @@ export default function ChannelManagement() {
       fetchData();
     }
   };
-
+  const closeModalAdd = () => {
+    setShowModalAdd(false);
+  };
 
   const handleFilterReset = () => {
     setSize("");
@@ -111,7 +113,7 @@ export default function ChannelManagement() {
           >
             <Stack>
               <Typography variant="h6" sx={{ mt: 4 }}>
-                List Daftar Ikan
+                List Anime
               </Typography>
               <Typography variant="caption" sx={{ mb: 1 }}>
                 Daftar Anime yang tersedia...
@@ -136,7 +138,12 @@ export default function ChannelManagement() {
             return <div key={item}>
             </div>
           })} */}
-          <List list={data} loading={loading} />
+          <Stack direction="row" alignItems="center">
+          </Stack>
+          <List list={data} loading={loading}>
+            <AddData isVisible={showModalAdd} handleClose={closeModalAdd} />
+
+          </List>
           {!loading && data.length === 0 && (
             <Empty
               title="Data belum tersedia"

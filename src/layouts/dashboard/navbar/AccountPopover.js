@@ -48,7 +48,7 @@ class AccountPopover extends React.Component {
             sx={{ color: "text.secondary" }}
             noWrap
           >
-            Hai Gaes
+            Herlan Mustopa
             {/* {"Halo, " + username} */}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }} noWrap>

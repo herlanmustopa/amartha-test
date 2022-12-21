@@ -10,17 +10,20 @@ export const getData = async (params) => {
       url: '/anime',
       params,
     });
-    console.log("RESPONSE");
-    console.log(response);
-
     const data = await response
-    // .data.map((item, index) => ({
-    //   ...item,
-    //   id: item.uuid,
-    // }));
-    console.log("DATA");
-    console.log(data);
-    // return toCamelCase(data);
+    return data;
+  } catch (e) {
+    return [];
+  }
+};
+// https://api.jikan.moe/v4/anime/{id}/full
+export const getDataById = async (id) => {
+  try {
+    let response = await ApiClient({
+      method: 'GET',
+      url: `/anime/${id}/full`,
+    });
+    const data = await response
     return data;
   } catch (e) {
     console.log(e);
@@ -28,52 +31,3 @@ export const getData = async (params) => {
   }
 };
 
-export const getCity = async () => {
-  try {
-    let response = await ApiClient({
-      method: 'GET',
-      url: Endpoint.GET_AREA,
-    });
-
-    const dataCity = uniq(response.map((item) => item.city)).map(
-      (i) => ({
-        label: capitalize(i),
-        value: i,
-      })
-    );
-
-    return dataCity;
-  } catch (e) {
-    console.error(e);
-    return { province: [], list: [] };
-  }
-};
-
-export const getSize = async () => {
-  try {
-    let response = await ApiClient({
-      method: 'GET',
-      url: Endpoint.GET_SIZE,
-    });
-
-    return response;
-  } catch (e) {
-    console.error(e);
-    return [];
-  }
-};
-
-export const addData = async (params) => {
-  try {
-    let response = await ApiClient({
-      method: 'POST',
-      url: Endpoint.ADD_DATA,
-      data: params,
-    })
-
-    return toCamelCase(response);
-  } catch (e) {
-    console.log(e);
-    return [];
-  }
-};

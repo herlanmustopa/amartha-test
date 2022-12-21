@@ -1,5 +1,5 @@
-import AddData from "./AddData";
 import CardItem from "./CardItem";
+import AddData from "./DetailData";
 // import FilterData from "./FilterData";
 // import DialogFilter from "./DialogFilter";
 import Empty from "./Empty";
